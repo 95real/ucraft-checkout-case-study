@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Browser as Customer browser
+    participant App as Checkout application
+    participant Server as Server / BFF boundary
+    participant Commerce as Commerce capabilities
+
+    Browser->>App: Navigate or submit action
+    App->>Server: Request data or mutation
+    Server->>Server: Resolve session, auth, and request context
+    Server->>Commerce: Orchestrate capability calls
+    Commerce-->>Server: Data or domain outcome
+    alt Navigation or server render
+        Server-->>App: Guest or authenticated rendered state
+        App-->>Browser: Checkout experience
+    else Mutation
+        Server-->>App: Mediated mutation result
+        App-->>Browser: Updated checkout state
+    end

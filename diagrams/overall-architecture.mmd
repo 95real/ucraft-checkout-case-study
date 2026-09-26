@@ -1,0 +1,21 @@
+flowchart TB
+    Browser["Customer browser"]
+
+    subgraph Checkout["Checkout application - architectural ownership"]
+        direction TB
+        Application["Rendering and routing<br/>Checkout domain logic<br/>Composed validation<br/>Lightweight client state"]
+        Server["Server / BFF boundary<br/>Session and auth resolution<br/>Read orchestration<br/>Mutation mediation"]
+        Application -->|Server reads| Server
+        Application -->|Mutations| Server
+        Server -->|Rendered state and results| Application
+    end
+
+    Commerce["Commerce capabilities<br/>Project configuration - Customer - Cart<br/>Fulfillment - Order - Payment"]
+    Payments["External payment systems"]
+
+    Browser -->|Navigate and act| Application
+    Application -->|Rendered experience| Browser
+    Server -->|Orchestrated requests| Commerce
+    Commerce -->|Commerce data and outcomes| Server
+    Commerce -->|Payment execution| Payments
+    Payments -->|Payment outcome| Commerce

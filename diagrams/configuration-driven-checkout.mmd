@@ -1,0 +1,11 @@
+flowchart LR
+    Configuration["Project configuration"] --> Core["Shared checkout core"]
+    Product["Product capabilities"] --> Core
+    Customer["Customer state"] --> Core
+    Step["Active checkout step"] --> Core
+
+    Core --> Sections["Visible sections"]
+    Core --> Data["Required data"]
+    Core --> Validation["Validation composition"]
+    Core --> Fulfillment["Fulfillment behavior"]
+    Core --> Payment["Payment behavior"]

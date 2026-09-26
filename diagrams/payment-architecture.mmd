@@ -1,0 +1,11 @@
+flowchart LR
+    Checkout["Checkout domain"] --> Orchestrator["Payment orchestration boundary"]
+
+    Orchestrator --> Embedded["Embedded / drop-in"]
+    Orchestrator --> Redirect["Redirect"]
+    Orchestrator --> Offline["Static / offline"]
+
+    Embedded --> Outcome["Normalized payment outcome"]
+    Redirect --> Outcome
+    Offline --> Outcome
+    Outcome --> Order["Order completion flow"]

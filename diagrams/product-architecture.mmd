@@ -1,0 +1,12 @@
+flowchart TB
+    Core["Common checkout flow"]
+
+    Physical["Physical"] -->|Fulfillment required| Core
+    Digital["Digital"] -->|No physical fulfillment| Core
+    Subscription["Subscription"] -->|Recurring terms| Core
+    Scheduled["Scheduled service"] -->|Scheduling metadata| Core
+    StoredValue["Stored value"] -->|Specialized presentation| Core
+
+    Core --> Contact["Contact and customer state"]
+    Core --> Conditional["Capability-based sections"]
+    Core --> Payment["Shared payment and order flow"]
