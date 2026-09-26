@@ -2,15 +2,19 @@
 
 ## Configuration-Driven SaaS Checkout Architecture
 
+I architected and built UCRAFT Checkout from scratch as the sole engineer and took it through manual QA to production delivery. The production checkout supported 10 product types and 3 payment integration models.
+
 **Role:** Senior Software Engineer / Sole Engineer
 
 **Scope:** Architecture -> Implementation -> QA -> Production
 
+**At a glance:** 10 product types | 3 payment integration models | 6 embedded/drop-in integrations | Single-page and multi-step | Guest and authenticated | Localized | Shipping and pickup
+
 ## Executive summary
 
-I architected and implemented UCRAFT Checkout from scratch as the sole engineer responsible for the application. The goal was not to build one checkout for one storefront. It was to build a single checkout application that could adapt to different project configurations, product capabilities, customer states, fulfillment paths, and payment models across a SaaS website-building platform.
+The engineering goal was not to build one checkout for one storefront. It was to build a single checkout application that could adapt to different project configurations, product capabilities, customer states, fulfillment paths, and payment models across a SaaS website-building platform.
 
-The resulting architecture kept the common purchase journey shared while deriving variable behavior from configuration and domain capabilities. It supported ten represented product types, single-page and multi-step journeys, guest and authenticated customers, localized experiences, shipping and pickup, and three distinct payment integration models.
+The resulting architecture kept the common purchase journey shared while deriving variable behavior from configuration and domain capabilities.
 
 This repository is a clean-room engineering case study. It contains architectural explanations, independently reconstructed diagrams, and small illustrative examples, but no production source code or confidential configuration.
 
@@ -159,9 +163,9 @@ sequenceDiagram
 
 ## State architecture
 
-I intentionally avoided adding Redux or another heavy state-management dependency. Checkout data arrived in relatively consolidated domain responses, and the application did not need a large graph of unrelated client endpoints.
+Checkout state used lightweight, domain-oriented React stores and providers. This was a fit-for-purpose choice: data arrived in relatively consolidated domain responses, and the application did not have a large graph of independent client endpoints that justified a broader state platform.
 
-Instead, state was divided by responsibility and exposed through lightweight React-oriented stores and providers. Checkout, payment, global project data, loading state, and UI state could evolve independently while retaining explicit domain operations. This reduced dependency and bundle overhead without sacrificing a clear state boundary.
+State was divided by responsibility so checkout, payment, global project data, loading state, and UI state could evolve independently while retaining explicit domain operations. This kept dependencies and bundle overhead proportionate without sacrificing a clear state boundary.
 
 [Illustrative lightweight-state example](examples/lightweight-domain-state.ts)
 
