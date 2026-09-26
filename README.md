@@ -2,7 +2,8 @@
 
 ## Configuration-Driven SaaS Checkout Architecture
 
-**Role:** Senior Software Engineer / Sole Engineer  
+**Role:** Senior Software Engineer / Sole Engineer
+
 **Scope:** Architecture -> Implementation -> QA -> Production
 
 ## Executive summary
@@ -176,7 +177,7 @@ That structure kept each rule understandable and allowed single-page and guided 
 
 Performance influenced architectural boundaries from the beginning. Conditional surfaces and payment integrations were split so that an integration SDK was loaded only when its flow was needed. Independent server reads were orchestrated together where possible, and server rendering reduced the amount of state discovery required after the browser loaded.
 
-Next.js route composition supported both single-page and multi-step experiences. Parallel Routes were used for authentication-related modal surfaces, allowing those interactions to participate in routing without expanding the primary checkout page into one monolithic client bundle.
+Next.js route composition supported both single-page and multi-step experiences. Parallel Routes were used for authentication-related modal surfaces, allowing those interactions to participate in routing while remaining compositionally separate from the primary checkout flow.
 
 ## Production outcome
 
